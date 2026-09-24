@@ -1,0 +1,526 @@
+:root {
+  --ink: #151425;
+  --panel: #201d33;
+  --panel-raised: #2a2640;
+  --sand: #ede3d0;
+  --sand-dim: #d8cdb4;
+  --ember: #e8a33d;
+  --ember-deep: #c9791f;
+  --moon: #f5f1e8;
+  --muted: #8b87a0;
+  --danger: #d9634f;
+  --border: rgba(245, 241, 232, 0.12);
+  --shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+  --radius: 18px;
+  font-size: 16px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--ink);
+  color: var(--moon);
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+}
+
+h1, h2, h3, .display {
+  font-family: 'Zen Old Mincho', serif;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+/* ---------- night sky backdrop ---------- */
+.sky {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 120% 60% at 50% 120%, #2a2140 0%, transparent 60%),
+    linear-gradient(180deg, #0f0e1c 0%, #1a1830 55%, #241f3a 100%);
+  overflow: hidden;
+}
+
+.moon {
+  position: absolute;
+  top: 8%;
+  right: 12%;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fffaf0, var(--sand-dim) 70%);
+  box-shadow: 0 0 60px 10px rgba(237, 227, 208, 0.25);
+}
+
+.stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1.5px 1.5px at 20% 30%, rgba(245,241,232,0.7), transparent),
+    radial-gradient(1.5px 1.5px at 70% 15%, rgba(245,241,232,0.5), transparent),
+    radial-gradient(1px 1px at 40% 65%, rgba(245,241,232,0.6), transparent),
+    radial-gradient(1.5px 1.5px at 85% 45%, rgba(245,241,232,0.5), transparent),
+    radial-gradient(1px 1px at 55% 80%, rgba(245,241,232,0.4), transparent),
+    radial-gradient(1.5px 1.5px at 10% 75%, rgba(245,241,232,0.5), transparent),
+    radial-gradient(1px 1px at 92% 70%, rgba(245,241,232,0.4), transparent);
+  background-repeat: no-repeat;
+}
+
+/* ---------- app shell ---------- */
+.app {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.brand {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.brand .display {
+  font-size: 2.6rem;
+  color: var(--sand);
+}
+
+.brand .sub {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+.card-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.card-panel + .card-panel {
+  margin-top: 16px;
+}
+
+label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+input[type="text"], input[type="number"] {
+  width: 100%;
+  background: var(--ink);
+  border: 1px solid var(--border);
+  color: var(--moon);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+  outline: 2px solid var(--ember);
+  outline-offset: 1px;
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+.field-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+.field-row .field { flex: 1; margin-bottom: 0; }
+
+.name-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.name-row .num {
+  flex: 0 0 34px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ember);
+  font-weight: 700;
+  font-family: 'Zen Old Mincho', serif;
+}
+.name-row input { flex: 1; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: 12px;
+  padding: 13px 22px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+  background: linear-gradient(180deg, var(--ember), var(--ember-deep));
+  color: #201400;
+  box-shadow: 0 8px 20px rgba(232, 163, 61, 0.35);
+  width: 100%;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--sand-dim);
+  border: 1px solid var(--border);
+}
+
+.btn-danger {
+  background: transparent;
+  color: var(--danger);
+  border: 1px solid rgba(217, 99, 79, 0.4);
+}
+
+.btn-coyote {
+  width: 100%;
+  background: linear-gradient(180deg, var(--danger), #a8362a);
+  color: var(--moon);
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 1.15rem;
+  padding: 16px 22px;
+  box-shadow: 0 10px 26px rgba(217, 99, 79, 0.4);
+  animation: none;
+}
+.btn-coyote:active {
+  animation: howl 0.35s ease;
+}
+.btn-coyote-confirm {
+  background: linear-gradient(180deg, #ffb020, var(--ember-deep));
+  color: #201400;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 0.95rem;
+}
+
+@keyframes howl {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+.btn-small {
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  border-radius: 9px;
+}
+
+.helper {
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  margin-top: 4px;
+}
+
+/* seed row */
+.seed-row {
+  display: flex;
+  gap: 8px;
+}
+.seed-row input { flex: 1; }
+
+/* url output */
+.url-box {
+  background: var(--ink);
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 0.8rem;
+  color: var(--sand-dim);
+  word-break: break-all;
+  margin-bottom: 12px;
+  font-family: monospace;
+}
+
+.link-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px;
+}
+.link-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: var(--panel-raised);
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+.link-item .name { font-weight: 700; }
+
+/* player select */
+.pick-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.pick-btn {
+  background: var(--panel-raised);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: var(--moon);
+  padding: 18px 10px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-family: 'Zen Old Mincho', serif;
+  cursor: pointer;
+}
+.pick-btn:active { background: var(--ember); color: #201400; }
+
+/* ---------- game board ---------- */
+.table-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+.others-ring {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+
+.card {
+  width: 92px;
+  height: 128px;
+  border-radius: 12px;
+  background: var(--sand);
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.4), inset 0 0 0 3px rgba(21,20,37,0.06);
+  position: relative;
+}
+
+.card .value {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 2.1rem;
+  font-weight: 900;
+}
+
+.card .owner {
+  position: absolute;
+  bottom: 8px;
+  font-size: 0.7rem;
+  color: #5b5540;
+  font-weight: 700;
+}
+
+.card-special {
+  background: linear-gradient(160deg, #2f2a4a, #1c1830);
+  color: var(--sand);
+}
+.card-special .value {
+  font-size: 1.15rem;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-weight: 700;
+  color: var(--ember);
+}
+.card-special .icon {
+  font-size: 1.6rem;
+  margin-bottom: 2px;
+}
+.card-special .owner {
+  color: var(--muted);
+}
+
+.self-card {
+  width: 130px;
+  height: 178px;
+  border-radius: 16px;
+  background: repeating-linear-gradient(135deg, #24304a, #24304a 10px, #1c2740 10px, #1c2740 20px);
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: var(--shadow);
+}
+
+.self-card .mark {
+  font-size: 2.4rem;
+  color: var(--muted);
+}
+
+.self-label {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-top: -8px;
+}
+
+.fire {
+  font-size: 1.8rem;
+  filter: drop-shadow(0 0 12px rgba(232,163,61,0.6));
+}
+
+.reveal-box {
+  width: 100%;
+  text-align: center;
+  margin-top: 8px;
+}
+
+.total-result {
+  margin-top: 14px;
+  text-align: center;
+  animation: pop 0.25s ease;
+}
+.total-result .value {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 3rem;
+  color: var(--ember);
+}
+.total-result .label {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.notes-box {
+  margin-top: 14px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.note-line {
+  background: var(--panel-raised);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.78rem;
+  color: var(--sand-dim);
+  line-height: 1.5;
+}
+
+@keyframes pop {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.footer-note {
+  margin-top: auto;
+  padding-top: 32px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.75rem;
+  line-height: 1.7;
+}
+
+.error-box {
+  background: rgba(217,99,79,0.12);
+  border: 1px solid rgba(217,99,79,0.4);
+  color: #f3b7ab;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+}
+
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 20px 0;
+}
+
+.you-badge {
+  display: inline-block;
+  background: var(--ember);
+  color: #201400;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-left: 6px;
+}
+
+/* ---------- 手番・ライフ パネル ---------- */
+.turn-panel { padding: 18px 20px; }
+
+.turn-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Zen Old Mincho', serif;
+  color: var(--sand);
+  margin-bottom: 12px;
+}
+.turn-current { color: var(--ember); }
+
+.chip-row {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+.chip {
+  flex: 0 0 auto;
+  background: var(--panel-raised);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 8px 12px;
+  text-align: center;
+  min-width: 76px;
+}
+.chip-active {
+  border-color: var(--ember);
+  box-shadow: 0 0 0 1px var(--ember) inset, 0 0 14px rgba(232,163,61,0.35);
+}
+.chip-eliminated { opacity: 0.4; }
+.chip-name { font-size: 0.78rem; font-weight: 700; white-space: nowrap; }
+.chip-x { color: var(--danger); font-size: 0.85rem; margin-top: 2px; }
+
+.last-result {
+  margin-top: 12px;
+  font-size: 0.8rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+}
+
+.card-eliminated { opacity: 0.4; filter: grayscale(0.6); }
+
+.outcome-slot { width: 100%; margin-top: 4px; }
+.outcome-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+.outcome-buttons .btn { width: 100%; }
+
+@media (max-width: 380px) {
+  .card { width: 80px; height: 112px; }
+  .card .value { font-size: 1.7rem; }
+  .self-card { width: 110px; height: 150px; }
+}
